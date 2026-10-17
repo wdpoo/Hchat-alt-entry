@@ -24,30 +24,18 @@ android {
             abiFilters += listOf("arm64-v8a")
         }
     }
-
-    signingConfigs {
-        create("。。") {
-            storeFile = file("keystore/。。.jks")
-            storePassword = providers.environmentVariable("HCAT_STORE_PASSWORD").orNull
-                ?: error("缺少 HCAT_STORE_PASSWORD")
-            keyAlias = providers.environmentVariable("HCAT_KEY_ALIAS").orNull
-                ?: error("缺少 HCAT_KEY_ALIAS")
-            keyPassword = providers.environmentVariable("HCAT_KEY_PASSWORD").orNull
-                ?: error("缺少 HCAT_KEY_PASSWORD")
-        }
-    }
+    
 
     buildTypes {
-        release {
-            signingConfig = signingConfigs.getByName("。。")
-            isMinifyEnabled = true
-            isShrinkResources = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
+    release {
+        isMinifyEnabled = true
+        isShrinkResources = true
+        proguardFiles(
+            getDefaultProguardFile("proguard-android-optimize.txt"),
+            "proguard-rules.pro"
+        )
     }
+}
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
